@@ -246,6 +246,8 @@ parse_conf(const char *config_path)
 			config.features |= FULLBOUNCE;
 		else if (strcmp(word, "NULLCLIENT") == 0 && data == NULL)
 			config.features |= NULLCLIENT;
+		else if (strcmp(word, "LOCALONLY") == 0 && data == NULL)
+			config.features |= LOCALONLY;
 		else {
 			errlogx(EX_CONFIG, "syntax error in %s:%d", config_path, lineno);
 			/* NOTREACHED */
@@ -254,6 +256,11 @@ parse_conf(const char *config_path)
 
 	if ((config.features & NULLCLIENT) && config.smarthost == NULL) {
 		errlogx(EX_CONFIG, "%s: NULLCLIENT requires SMARTHOST", config_path);
+		/* NOTREACHED */
+	}
+
+	if ((config.features & LOCALONLY) && config.smarthost != NULL) {
+		errlogx(EX_CONFIG, "%s: LOCALONLY incompatible with SMARTHOST", config_path);
 		/* NOTREACHED */
 	}
 

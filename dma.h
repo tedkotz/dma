@@ -70,6 +70,7 @@
 #define FULLBOUNCE	0x040		/* Bounce the full message */
 #define TLS_OPP		0x080		/* Opportunistic STARTTLS */
 #define NULLCLIENT	0x100		/* Nullclient support */
+#define LOCALONLY	0x200		/* Only deliver mail to this host */
 
 #ifndef CONF_PATH
 #error Please define CONF_PATH

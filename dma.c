@@ -351,10 +351,15 @@ deliver(struct qitem *it)
 retry:
 	syslog(LOG_INFO, "<%s> trying delivery", it->addr);
 
-	if (it->remote)
-		error = deliver_remote(it);
-	else
+	if (!(it->remote)) {
 		error = deliver_local(it);
+	} else if (config.features & LOCALONLY) {
+		snprintf(errmsg, sizeof(errmsg),
+			 "Could not deliver remote mail while configured for LOCALONLY.");
+		goto bounce;
+	} else {
+		error = deliver_remote(it);
+	}
 
 	switch (error) {
 	case 0:

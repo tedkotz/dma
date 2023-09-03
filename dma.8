@@ -325,6 +325,14 @@ the defined
 requires
 .Sq SMARTHOST
 to be set.
+.It Ic LOCALONLY Xo
+(boolean, default=commented)
+.Xc
+Only deliver mail destined for the local host.
+Incompatible with
+.Sq SMARTHOST
+and thus
+.Sq NULLCLIENT .
 .El
 .Ss Environment variables
 The behavior of
