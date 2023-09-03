@@ -33,6 +33,9 @@
  * SUCH DAMAGE.
  */
 
+/* Request OpenSSL API compatible with latest version explicitly supported */
+#define OPENSSL_API_COMPAT 0x10100000L
+
 #include <openssl/x509.h>
 #include <openssl/md5.h>
 #include <openssl/ssl.h>
